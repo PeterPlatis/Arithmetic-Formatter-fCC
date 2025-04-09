@@ -40,8 +40,7 @@ def arithmetic_arranger(problems, show_answers=False):
     
     ## create the string that will be displayed
     max_length_list = []
-    for number in first_numbers:
-        index = first_numbers.index(number)
+    for index,number in enumerate(first_numbers):
         max_length_list.append(max(len(str(number)), len(str(second_numbers[index])))+2)
     
     if [x for x in max_length_list if x > 6]:
@@ -53,25 +52,21 @@ def arithmetic_arranger(problems, show_answers=False):
     third_line = ""
     fourth_line = ""
     space = "    "
-    for number in first_numbers:
-        
-        index = first_numbers.index(number)
+    for index,number in enumerate(first_numbers):
         
         first_line += " " * (max_length_list[index] - len(str(first_numbers[index]))) + str(first_numbers[index]) + space
         second_line += sign_symbols[index] + " " * ((max_length_list[index] - len(str(second_numbers[index]))) -1) + str(second_numbers[index]) + space
         third_line += "-" * max_length_list[index] + space
         fourth_line += " " * (max_length_list[index] - len(str(solution_numbers[index]))) + str(solution_numbers[index]) + space
     
-    first_line += "\n"
-    second_line += "\n"
-    third_line += "\n"
-    fourth_line += "\n"
+    first_line = first_line.rstrip() + "\n"
+    second_line = second_line.rstrip() + "\n"
+    third_line = third_line.rstrip()
+    fourth_line = fourth_line.rstrip()
     #_
     
-    final_string = first_line + second_line + third_line + fourth_line
+    final_string = first_line + second_line + third_line
     ##_
     if show_answers:
-        print(final_string)
+        final_string += "\n" + fourth_line
     return final_string
-
-print(f'\n{arithmetic_arranger(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"])}')
