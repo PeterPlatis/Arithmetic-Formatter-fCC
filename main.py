@@ -1,4 +1,6 @@
 def arithmetic_arranger(problems, show_answers=False):
+    if len(problems) > 5:
+        return "Error: Too many problems."
     ## create lists of the numbers and signs that are used
     first_numbers = []
     second_numbers = []
@@ -7,6 +9,10 @@ def arithmetic_arranger(problems, show_answers=False):
     for problem in problems:
         # isolate problem numbers and convert to int
         problem_numbers = problem.split(" ")
+        
+        if [x for x in problem_numbers if x.isalpha()]:
+            return "Error: Numbers must only contain digits."
+        
         problem_numbers = [int(number) for number in problem_numbers if number.isnumeric()]
         #_
         
@@ -22,9 +28,12 @@ def arithmetic_arranger(problems, show_answers=False):
         if "+" in problem:
             solved_problem = sum(problem_numbers)
             sign_symbols.append("+")
-        else:
+        elif "-" in problem:
             solved_problem = problem_numbers[0] - problem_numbers[1]
             sign_symbols.append("-")
+        else:
+            return "Error: Operator must be '+' or '-'."
+        
         solution_numbers.append(solved_problem)
         #_
     ##_
@@ -34,7 +43,9 @@ def arithmetic_arranger(problems, show_answers=False):
     for number in first_numbers:
         index = first_numbers.index(number)
         max_length_list.append(max(len(str(number)), len(str(second_numbers[index])))+2)
-    print(max_length_list)
+    
+    if [x for x in max_length_list if x > 6]:
+        return "Error: Numbers cannot be more than four digits."
     
     # create the lines
     first_line = ""
