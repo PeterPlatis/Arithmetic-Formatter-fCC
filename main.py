@@ -10,7 +10,7 @@ def arithmetic_arranger(problems, show_answers=False):
         # isolate problem numbers and convert to int
         problem_numbers = problem.split(" ")
         
-        if [x for x in problem_numbers if x.isalpha()]:
+        if [x for x in problem_numbers if [i for i in str(x) if i.isalpha()]]:
             return "Error: Numbers must only contain digits."
         
         problem_numbers = [int(number) for number in problem_numbers if number.isnumeric()]
@@ -70,3 +70,5 @@ def arithmetic_arranger(problems, show_answers=False):
     if show_answers:
         final_string += "\n" + fourth_line
     return final_string
+
+print(f'\n{arithmetic_arranger(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"])}')
